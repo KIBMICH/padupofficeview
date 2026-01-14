@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { SignupPage } from '../pages/SignupPage';
 import { SignupFormPage } from '../pages/SignupFormPage';
 import { TrackOrderPage } from '../pages/TrackOrderPage';
+import logo from '../assets/images/logo.png';
 
 export const AppRoutes: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,12 +22,7 @@ export const AppRoutes: React.FC = () => {
         <nav className="bg-white py-3 px-4 md:px-8 border-b border-gray-100 sticky top-0 z-50 relative">
           <div className="max-w-5xl mx-auto flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-lemonGreen rounded-lg flex items-center justify-center">
-                <span className="text-black font-bold text-sm">D</span>
-              </div>
-              <span className="font-semibold text-sm text-gray-900">
-                Distributor & Sales Agent Portal
-              </span>
+              <img src={logo} alt="Logo" className="h-8 w-auto" />
             </Link>
 
             {/* Desktop Nav Links */}

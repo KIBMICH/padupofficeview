@@ -3,31 +3,31 @@ import { Benefit } from '../types';
 export const benefits: Benefit[] = [
   {
     id: '1',
-    title: '50% discount on every product as a sales agent or distributor',
+    title: '1-5% discount on every product as a sales agent or distributor',
     description: '',
     icon: '✓',
   },
   {
     id: '2',
-    title: 'Free delivery to the company',
+    title: 'Free advert by the company',
     description: '',
     icon: '✓',
   },
   {
     id: '3',
-    title: 'Referral bonuses when you refer someone who signs up as an agent. Get free cash, airtime, or airtime as a bonus',
+    title: 'Referral bonuses when you refer someone who signs up as an agent. Can be cash, product or advert as you desire',
     description: '',
     icon: '✓',
   },
   {
     id: '4',
-    title: 'Free access to our online community',
+    title: 'Referral of prospective customer',
     description: '',
     icon: '✓',
   },
   {
     id: '5',
-    title: 'Free business advice on the T-shirt, hand bags, shoes, customer services and more',
+    title: 'Free branded collecterals like T-shirt, hand bills, jotter, banner, umbrella and more',
     description: '',
     icon: '✓',
   },
@@ -45,13 +45,13 @@ export const benefits: Benefit[] = [
   },
   {
     id: '8',
-    title: 'Based on your product performance on our staff, we give you a weekly bonus right',
+    title: 'Award on exceptional performance on our staff and partners award night',
     description: '',
     icon: '✓',
   },
   {
     id: '9',
-    title: 'Free training to build up business skills and visibility',
+    title: 'Free training including business sales and visibilty training',
     description: '',
     icon: '✓',
   },
