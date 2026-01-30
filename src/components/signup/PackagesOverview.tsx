@@ -71,7 +71,7 @@ export const PackagesOverview: React.FC = () => {
           <h3 className="text-lg font-bold text-black mb-4 text-left">
             Sales Agent Packages
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {salesAgentPackages.map((pkg) => (
               <div
                 key={pkg.id}
