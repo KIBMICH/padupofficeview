@@ -2,6 +2,7 @@ import React from 'react';
 import { benefits } from '../data/benefits';
 import { HeroSection } from '../components/signup/HeroSection';
 import { BenefitsSection } from '../components/signup/BenefitsSection';
+import { DistributionImageSection } from '../components/signup/DistributionImageSection';
 import { PackagesOverview } from '../components/signup/PackagesOverview';
 import { CTASection } from '../components/signup/CTASection';
 
@@ -13,8 +14,11 @@ export const SignupPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <DistributionImageSection />
       <HeroSection onScrollToForm={handleScrollToSignup} />
+    
       <BenefitsSection benefits={benefits} />
+    
       <PackagesOverview />
       <CTASection onScrollToForm={handleScrollToSignup} />
     </div>
