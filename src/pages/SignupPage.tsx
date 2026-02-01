@@ -16,9 +16,7 @@ export const SignupPage: React.FC = () => {
     <div className="min-h-screen bg-white">
       <DistributionImageSection />
       <HeroSection onScrollToForm={handleScrollToSignup} />
-    
       <BenefitsSection benefits={benefits} />
-    
       <PackagesOverview />
       <CTASection onScrollToForm={handleScrollToSignup} />
     </div>
