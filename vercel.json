@@ -1,5 +1,9 @@
 {
   "rewrites": [
+    { 
+      "source": "/api/submit_customers/:path*", 
+      "destination": "https://www.padupoffice.com/api/submit_customers/:path*" 
+    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }

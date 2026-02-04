@@ -153,10 +153,12 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
       console.log('Submitting data:', apiData);
 
-      const response = await fetch('https://www.padupoffice.com/submit_customers.php', {
+      // Use relative URL - proxied in both dev (Vite) and production (Vercel)
+      const response = await fetch('/api/submit_customers/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(apiData),
       });
@@ -211,8 +213,12 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       }
     } catch (error) {
       console.error('Submission error:', error);
-      if (!errorMessage) {
-        setErrorMessage(error instanceof Error ? error.message : 'Network error. Please check your connection.');
+      
+      // Provide more specific error messages
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        setErrorMessage('Unable to connect to the server. This might be a CORS issue or network problem. Please check your connection or contact support.');
+      } else if (!errorMessage) {
+        setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.');
       }
       setSubmitStatus('error');
     } finally {
