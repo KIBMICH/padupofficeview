@@ -11,6 +11,7 @@ interface SignupFormData {
   lastName: string;
   email: string;
   phoneNumber: string;
+  state: string;
   address: string;
   companyName: string;
   role: AccountType;
@@ -29,6 +30,7 @@ interface FormErrors {
 export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [errors, setErrors] = useState<FormErrors>({});
 
   const [formData, setFormData] = useState<SignupFormData>({
@@ -36,6 +38,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
     lastName: '',
     email: '',
     phoneNumber: '',
+    state: '',
     address: '',
     companyName: '',
     role: AccountType.SALES_AGENT,
@@ -66,6 +69,10 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
     if (!formData.phoneNumber.trim()) {
       newErrors.phoneNumber = 'Phone number is required';
+    }
+
+    if (!formData.state.trim()) {
+      newErrors.state = 'State is required';
     }
 
     if (!formData.address.trim()) {
@@ -129,12 +136,84 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
     setIsLoading(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      onSubmit?.(formData);
+      // Format data to match the API requirements
+      const apiData = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        state: formData.state,
+        address: formData.address,
+        role: formData.role === AccountType.SALES_AGENT ? 'sales_agent' : 'distributor',
+        password: formData.password,
+      };
+
+      console.log('Submitting data:', apiData);
+
+      const response = await fetch('https://www.padupoffice.com/submit_customers.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiData),
+      });
+
+      console.log('Response status:', response.status);
+      
+      // Try to parse response as JSON
+      let result;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        const text = await response.text();
+        console.log('Response text:', text);
+        result = { success: response.ok };
+      }
+
+      console.log('Response data:', result);
+
+      // Check if submission was successful
+      if (response.ok || result.success) {
+        setSubmitStatus('success');
+        onSubmit?.(formData);
+        
+        // Reset form after successful submission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneNumber: '',
+          state: '',
+          address: '',
+          companyName: '',
+          role: AccountType.SALES_AGENT,
+          packageId: PackageType.STANDARD,
+          password: '',
+          confirmPassword: '',
+          referralCode: '',
+          contactMethod: '',
+          agreeToTerms: false,
+        });
+      } else {
+        // Handle specific error codes
+        let errorMsg = result.message || 'Submission failed';
+        if (response.status === 409) {
+          errorMsg = 'This email or phone number is already registered. Please use a different one or login.';
+        } else if (response.status === 400) {
+          errorMsg = 'Invalid data provided. Please check your information.';
+        }
+        setErrorMessage(errorMsg);
+        throw new Error(errorMsg);
+      }
     } catch (error) {
+      console.error('Submission error:', error);
+      if (!errorMessage) {
+        setErrorMessage(error instanceof Error ? error.message : 'Network error. Please check your connection.');
+      }
       setSubmitStatus('error');
     } finally {
       setIsLoading(false);
@@ -162,8 +241,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       )}
 
       {submitStatus === 'error' && (
-        <div className="mb-6 p-4 bg-red-500 text-white rounded-lg text-center text-sm">
-          ✗ An error occurred. Please try again.
+        <div className="mb-6 p-4 bg-red-500 text-white rounded-lg text-sm">
+          <div className="font-semibold mb-1">✗ An error occurred</div>
+          <div className="text-xs">{errorMessage || 'Please try again.'}</div>
         </div>
       )}
 
@@ -241,6 +321,24 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
         </div>
 
+        {/* State */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            State
+          </label>
+          <input
+            type="text"
+            name="state"
+            value={formData.state}
+            onChange={handleInputChange}
+            placeholder="Lagos"
+            className={`w-full px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lemonGreen ${
+              errors.state ? 'border-red-500' : 'border-gray-300'
+            }`}
+          />
+          {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
+        </div>
+
         {/* Address */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -250,7 +348,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
             name="address"
             value={formData.address}
             onChange={handleInputChange}
-            placeholder="123 Main St, City, State, Country"
+            placeholder="123 Main St, City"
             rows={3}
             className={`w-full px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lemonGreen resize-none ${
               errors.address ? 'border-red-500' : 'border-gray-300'
