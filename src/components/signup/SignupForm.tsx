@@ -155,8 +155,8 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
       console.log('Submitting data:', apiData);
 
-      // Use relative URL - proxied in both dev (Vite) and production (Vercel)
-      const response = await fetch('/api/submit_customers/', {
+      // Use Vercel serverless function as proxy
+      const response = await fetch('/api/submit_customers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

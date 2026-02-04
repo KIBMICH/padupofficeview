@@ -1,9 +1,5 @@
 {
   "rewrites": [
-    { 
-      "source": "/api/:path*", 
-      "destination": "https://www.padupoffice.com/api/:path*" 
-    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
