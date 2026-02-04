@@ -148,6 +148,8 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         state: formData.state,
         address: formData.address,
         role: formData.role === AccountType.SALES_AGENT ? 'sales_agent' : 'distributor',
+        package_type: formData.packageId,
+        referral_code: formData.referralCode || '',
         password: formData.password,
       };
 
