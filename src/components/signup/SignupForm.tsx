@@ -244,7 +244,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
 
       {submitStatus === 'success' && (
         <div className="mb-6 p-4 bg-lemonGreen text-black rounded-lg text-center text-sm">
-          ✓ Account created successfully! Check your email for confirmation.
+          ✓ Account created successfully! We will get back to you soon.
         </div>
       )}
 
