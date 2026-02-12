@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import heroImage from '../../assets/images/hero.png';
 
 interface HeroSectionProps {
@@ -6,6 +7,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToForm }) => {
+  const navigate = useNavigate();
+
   return (
     <section className="py-16 px-4 md:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -26,7 +29,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToForm }) => {
                 Sign Up Now
               </button>
               <button
-                onClick={onScrollToForm}
+                onClick={() => navigate('/learn-more')}
                 className="border-2 border-brandOrange text-brandOrange text-sm font-semibold px-6 py-3 rounded-lg hover:bg-orange-50 transition-all"
               >
                 Learn More
@@ -37,16 +40,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToForm }) => {
             <p className="text-gray-500 text-sm mb-3">Trusted by distributors nationwide.</p>
             <div className="flex flex-wrap gap-4 text-xs text-gray-600">
               <div className="flex items-center gap-1">
-                <span className="text-lemonGreen">🏆</span>
-                <span>Award-winning services</span>
+                <span className="text-lemonGreen">📦</span>
+                <span>High demand products</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-lemonGreen">�</span>
+                <span>Real-Time Tracking/delivery</span>
               </div>
               <div className="flex items-center gap-1">
                 <span className="text-lemonGreen">💰</span>
                 <span>High earning potential</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-lemonGreen">🌐</span>
-                <span>Global network</span>
               </div>
             </div>
           </div>

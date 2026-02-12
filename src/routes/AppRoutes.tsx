@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { SignupPage } from '../pages/SignupPage';
 import { SignupFormPage } from '../pages/SignupFormPage';
 import { TrackOrderPage } from '../pages/TrackOrderPage';
+import { LearnMorePage } from '../pages/LearnMorePage';
 import logo from '../assets/images/logo.png';
 
 export const AppRoutes: React.FC = () => {
@@ -105,6 +106,7 @@ export const AppRoutes: React.FC = () => {
             <Route path="/" element={<SignupPage />} />
             <Route path="/signup-form" element={<SignupFormPage />} />
             <Route path="/track-order" element={<TrackOrderPage />} />
+            <Route path="/learn-more" element={<LearnMorePage />} />
           </Routes>
         </main>
 

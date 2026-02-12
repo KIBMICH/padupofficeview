@@ -243,8 +243,17 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       </div>
 
       {submitStatus === 'success' && (
-        <div className="mb-6 p-4 bg-lemonGreen text-black rounded-lg text-center text-sm">
-          ✓ Account created successfully! We will get back to you soon.
+        <div className="mb-6 p-4 bg-lemonGreen text-black rounded-lg text-sm">
+          <div className="font-semibold mb-2 text-center">✓ Account created successfully!</div>
+          <p className="text-center mb-3">You can now login with your credentials at:</p>
+          <a 
+            href="https://www.padupoffice.com/customers/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block text-center text-blue-700 hover:text-blue-900 underline font-medium"
+          >
+            www.padupoffice.com
+          </a>
         </div>
       )}
 
