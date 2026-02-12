@@ -37,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollToForm }) => {
             </div>
             
             {/* Trust indicators */}
-            <p className="text-gray-500 text-sm mb-3">Trusted by distributors nationwide.</p>
+            <p className="text-gray-500 text-sm mb-3">Trusted by distributors in 21 countries.</p>
             <div className="flex flex-wrap gap-4 text-xs text-gray-600">
               <div className="flex items-center gap-1">
                 <span className="text-lemonGreen">📦</span>
