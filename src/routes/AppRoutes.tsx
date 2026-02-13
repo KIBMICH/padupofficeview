@@ -4,13 +4,10 @@ import { SignupPage } from '../pages/SignupPage';
 import { SignupFormPage } from '../pages/SignupFormPage';
 import { TrackOrderPage } from '../pages/TrackOrderPage';
 import { LearnMorePage } from '../pages/LearnMorePage';
-import { MenstrualChangemakerPage } from '../pages/MenstrualChangemakerPage';
 import logo from '../assets/images/logo.png';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
-  const isFellowshipPage = location.pathname === '/fellowship';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,9 +24,7 @@ const Navigation: React.FC = () => {
           <img src={logo} alt="Logo" className="h-8 w-auto" />
         </Link>
 
-        {!isFellowshipPage && (
-          <>
-            {/* Desktop Nav Links */}
+        {/* Desktop Nav Links */}
             <div className="hidden md:flex gap-6 text-xs">
               <Link to="/" className="text-gray-600 hover:text-black">
                 Home
@@ -58,12 +53,10 @@ const Navigation: React.FC = () => {
               <span className={`w-5 h-0.5 bg-gray-700 transition-all ${isMenuOpen ? 'opacity-0' : ''}`}></span>
               <span className={`w-5 h-0.5 bg-gray-700 transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
             </button>
-          </>
-        )}
       </div>
 
       {/* Mobile Menu */}
-      {!isFellowshipPage && isMenuOpen && (
+      {isMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg z-50">
           <div className="flex flex-col py-4 px-4">
             <Link 
@@ -120,7 +113,6 @@ export const AppRoutes: React.FC = () => {
             <Route path="/signup-form" element={<SignupFormPage />} />
             <Route path="/track-order" element={<TrackOrderPage />} />
             <Route path="/learn-more" element={<LearnMorePage />} />
-            <Route path="/fellowship" element={<MenstrualChangemakerPage />} />
           </Routes>
         </main>
 
