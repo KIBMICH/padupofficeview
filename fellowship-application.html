@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fellowship Application - Pad-Up Creations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lemonGreen: '#A6E22E',
+                        brandOrange: '#F97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-white py-3 px-4 md:px-8 border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="fellowship.html" class="flex items-center gap-2">
+                <img src="images/logo.png" alt="Pad-Up Creations Logo" class="h-8 w-auto">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Application Form Section -->
+    <div class="bg-gray-50 py-12 md:py-16 min-h-screen">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-black mb-4">
+                    Fellowship Application
+                </h1>
+                <p class="text-gray-600">
+                    Complete the form below to apply for the Menstrual Changemakers Fellowship
+                </p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-sm">
+                <div id="successMessage" style="display:none;" class="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
+                    <p class="font-semibold">Thank you for your application!</p>
+                    <p class="text-sm">We have received your fellowship application and will review it soon.</p>
+                </div>
+                
+                <div id="errorMessage" style="display:none;" class="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg">
+                    <p class="font-semibold">An error occurred</p>
+                    <p class="text-sm" id="errorText">Please try again.</p>
+                </div>
+
+                <form id="fellowshipForm" method="POST" class="space-y-8">
+                    
+                    <!-- Honeypot field for spam protection (hidden from users) -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    
+                    <!-- Section 1: Personal Information -->
+                    <div>
+                        <h3 class="text-xl font-bold text-black mb-4 pb-2 border-b-2 border-brandOrange">
+                            Section 1: Personal Information
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                                    <input type="text" name="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                                    <input type="text" name="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Other Names</label>
+                                    <input type="text" name="otherNames" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Email Address * <span class="text-gray-500 text-xs">(Used for all official correspondence)</span>
+                                </label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                                    <input type="tel" name="phoneNumber" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp Number *</label>
+                                    <input type="tel" name="whatsappNumber" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                                        Country of Residence * <span class="text-gray-500 text-xs">(Must be an African country)</span>
+                                    </label>
+                                    <input type="text" name="country" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">City/State *</label>
+                                    <input type="text" name="cityState" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" name="is18OrOlder" required class="w-4 h-4 accent-brandOrange">
+                                    <span class="text-sm text-gray-700">I confirm that I am 18 years or older *</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Background & Skills -->
+                    <div>
+                        <h3 class="text-xl font-bold text-black mb-4 pb-2 border-b-2 border-brandOrange">
+                            Section 2: Background & Skills
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Current Occupation/Field of Study *</label>
+                                <input type="text" name="occupation" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn Profile Link (Optional but recommended)</label>
+                                <input type="url" name="linkedinProfile" placeholder="https://linkedin.com/in/yourprofile" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Language Proficiency * <span class="text-gray-500 text-xs">(Select all that apply)</span>
+                                </label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="English" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">English</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="French" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">French</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="Arabic" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Arabic</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="Swahili" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Swahili</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="Portuguese" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Portuguese</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" name="languages" value="Other" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Other</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Experience in Social Impact *
+                                    <span class="text-gray-500 text-xs block mt-1">Have you volunteered or worked on any community projects before?</span>
+                                </label>
+                                <textarea name="socialImpactExperience" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent resize-none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Commitment & Availability -->
+                    <div>
+                        <h3 class="text-xl font-bold text-black mb-4 pb-2 border-b-2 border-brandOrange">
+                            Section 3: Commitment & Availability
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Training Availability *
+                                    <span class="text-gray-500 text-xs block mt-1">Are you able to commit to 6 hours per week for the 3-week online training?</span>
+                                </label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="trainingAvailability" value="yes" required class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Yes</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="trainingAvailability" value="no" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Post-Training Commitment *
+                                    <span class="text-gray-500 text-xs block mt-1">If selected, are you willing to work at least 4 hours per week for a stipend?</span>
+                                </label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="postTrainingCommitment" value="yes" required class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Yes</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="postTrainingCommitment" value="no" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">No</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Device Access *
+                                    <span class="text-gray-500 text-xs block mt-1">Do you have reliable access to a smartphone/laptop and stable internet?</span>
+                                </label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="deviceAccess" value="yes" required class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">Yes</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="deviceAccess" value="no" class="w-4 h-4 accent-brandOrange">
+                                        <span class="text-sm">No</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Motivation & Alignment -->
+                    <div>
+                        <h3 class="text-xl font-bold text-black mb-4 pb-2 border-b-2 border-brandOrange">
+                            Section 4: Motivation & Alignment
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Statement of Interest *
+                                    <span class="text-gray-500 text-xs block mt-1">Why do you want to become a Global Menstrual Change Maker? (200 words max)</span>
+                                </label>
+                                <textarea name="statementOfInterest" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent resize-none"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Problem Solving *
+                                    <span class="text-gray-500 text-xs block mt-1">What is one major challenge regarding menstrual health in your local community, and how would you address it?</span>
+                                </label>
+                                <textarea name="problemSolving" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent resize-none"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">How did you hear about this fellowship? *</label>
+                                <input type="text" name="howDidYouHear" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brandOrange focus:border-transparent">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Declaration & Submission -->
+                    <div>
+                        <h3 class="text-xl font-bold text-black mb-4 pb-2 border-b-2 border-brandOrange">
+                            Section 5: Declaration & Submission
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="flex items-start gap-2 cursor-pointer">
+                                    <input type="checkbox" name="certifyInformation" required class="w-4 h-4 mt-0.5 accent-brandOrange">
+                                    <span class="text-sm text-gray-700">I certify that the information provided is true and that I am an African citizen. *</span>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label class="flex items-start gap-2 cursor-pointer">
+                                    <input type="checkbox" name="agreeToCommitment" required class="w-4 h-4 mt-0.5 accent-brandOrange">
+                                    <span class="text-sm text-gray-700">I understand that this opportunity requires my time and I am willing to commit my time to this. *</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-brandOrange text-white font-bold px-8 py-4 rounded-lg hover:bg-orange-600 transition-all text-lg">
+                        Submit Application
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-4 px-4 md:px-8 border-t border-gray-100">
+        <div class="max-w-5xl mx-auto text-center">
+            <p class="text-xs text-gray-500">
+                © 2026 Fellowship. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+    <script>
+        document.getElementById('fellowshipForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMsg = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            const form = this;
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            // Hide previous messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            // Create FormData object
+            const formData = new FormData(form);
+            
+            // Send form data via AJAX
+            fetch('fellowship-submit.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(data => {
+                console.log('Server response:', data); // Debug log
+                
+                if (data.includes('success')) {
+                    successMsg.style.display = 'block';
+                    
+                    // Show email status for debugging
+                    if (data.includes('Email sent: No')) {
+                        successMsg.innerHTML = '<p class="font-semibold">Application saved but email failed to send.</p><p class="text-sm">Your application has been saved. We will review it soon.</p><p class="text-xs text-gray-500 mt-2">Debug: ' + data + '</p>';
+                    } else if (data.includes('Email sent: Yes')) {
+                        successMsg.innerHTML = '<p class="font-semibold">Thank you for your application!</p><p class="text-sm">Email was sent successfully to program1@padupcreations.com</p><p class="text-xs text-gray-500 mt-2">Debug: ' + data + '</p>';
+                    } else {
+                        successMsg.innerHTML = '<p class="font-semibold">Thank you for your application!</p><p class="text-sm">We have received your fellowship application and will review it soon.</p><p class="text-xs text-gray-500 mt-2">Debug: ' + data + '</p>';
+                    }
+                    
+                    form.reset();
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    errorMsg.style.display = 'block';
+                    document.getElementById('errorText').textContent = data;
+                }
+            })
+            .catch(error => {
+                errorMsg.style.display = 'block';
+                document.getElementById('errorText').textContent = 'An error occurred. Please try again.';
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Application';
+            });
+        });
+    </script>

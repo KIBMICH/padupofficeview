@@ -25,12 +25,7 @@ dist-ssr
 *.sw?
 
 # cPanel specific files (not for Vercel)
-fellowship.html
-fellowship-application.html
-fellowship-submit.php
-fellowship-submit-v2.php
-images/
 .htaccess
 fellowship-applications.txt
 smtp-errors.log
-test-email.php
+.env
