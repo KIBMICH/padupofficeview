@@ -127,7 +127,7 @@ export const AppRoutes: React.FC = () => {
         <footer className="bg-white py-4 px-4 md:px-8 border-t border-gray-100">
           <div className="max-w-5xl mx-auto text-center">
             <p className="text-xs text-gray-500">
-              © 2024 Distributor & Sales Agent Portal. All rights reserved.
+              © 2026 Distributor & Sales Agent Portal. All rights reserved.
             </p>
           </div>
         </footer>
