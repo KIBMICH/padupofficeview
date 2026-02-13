@@ -61,14 +61,23 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       newErrors.lastName = 'Last name is required';
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    // Email is optional, but if provided, must be valid
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
 
+    // Phone number is required and must match Nigerian format
     if (!formData.phoneNumber.trim()) {
       newErrors.phoneNumber = 'Phone number is required';
+    } else {
+      // Nigerian phone number validation
+      // Accepts formats: 08012345678, +2348012345678, 2348012345678, 0701234567, +2347012345678
+      const nigerianPhoneRegex = /^(\+?234|0)?[7-9][0-1]\d{8}$/;
+      const cleanedPhone = formData.phoneNumber.replace(/[\s-]/g, '');
+      
+      if (!nigerianPhoneRegex.test(cleanedPhone)) {
+        newErrors.phoneNumber = 'Please enter a valid Nigerian phone number (e.g., 08012345678 or +2348012345678)';
+      }
     }
 
     if (!formData.state.trim()) {
@@ -245,14 +254,15 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
       {submitStatus === 'success' && (
         <div className="mb-6 p-4 bg-lemonGreen text-black rounded-lg text-sm">
           <div className="font-semibold mb-2 text-center">✓ Account created successfully!</div>
-          <p className="text-center mb-3">You can now login with your credentials at:</p>
+          <p className="text-center mb-3">Please check your phone or email for your login details.</p>
+          <p className="text-center mb-3">You can now login at:</p>
           <a 
             href="https://www.padupoffice.com/customers/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="block text-center text-blue-700 hover:text-blue-900 underline font-medium"
           >
-            www.padupoffice.com
+            www.padupoffice.com/customers
           </a>
         </div>
       )}
@@ -301,10 +311,10 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Email (Optional) */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email
+            Email (Optional)
           </label>
           <input
             type="email"
@@ -322,19 +332,19 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         {/* Phone Number */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Phone Number
+            Phone Number <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleInputChange}
-            placeholder="+234 801 234 5678"
+            placeholder="08012345678 or +2348012345678"
             className={`w-full px-4 py-3 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lemonGreen ${
               errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
             }`}
           />
-          <p className="text-gray-400 text-xs mt-1">Please use an international format (e.g., +1 234 567 8900)</p>
+          <p className="text-gray-400 text-xs mt-1">Enter a valid Nigerian phone number</p>
           {errors.phoneNumber && <p className="text-red-500 text-xs mt-1">{errors.phoneNumber}</p>}
         </div>
 
