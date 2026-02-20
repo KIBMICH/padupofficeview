@@ -4,6 +4,7 @@ export enum AccountType {
 }
 
 export enum PackageType {
+  MICRO = 'micro',
   STANDARD = 'standard',
   EXECUTIVE = 'executive',
   PREMIUM = 'premium',

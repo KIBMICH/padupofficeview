@@ -42,7 +42,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
     address: '',
     companyName: '',
     role: AccountType.SALES_AGENT,
-    packageId: PackageType.STANDARD,
+    packageId: PackageType.MICRO,
     password: '',
     confirmPassword: '',
     referralCode: '',
@@ -118,7 +118,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
         role: value as AccountType,
         packageId:
           value === AccountType.SALES_AGENT
-            ? PackageType.STANDARD
+            ? PackageType.MICRO
             : PackageType.MINOR_DISTRIBUTOR,
       }));
     } else {
@@ -204,7 +204,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           address: '',
           companyName: '',
           role: AccountType.SALES_AGENT,
-          packageId: PackageType.STANDARD,
+          packageId: PackageType.MICRO,
           password: '',
           confirmPassword: '',
           referralCode: '',
@@ -435,18 +435,25 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Package Selection
           </label>
-          <select
-            name="packageId"
-            value={formData.packageId}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lemonGreen appearance-none bg-white"
-          >
-            {currentPackages.map((pkg) => (
-              <option key={pkg.id} value={pkg.id}>
-                {pkg.name} (₦{pkg.price.toLocaleString()} - {pkg.commission}% discount)
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              name="packageId"
+              value={formData.packageId}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lemonGreen appearance-none bg-white pr-10"
+            >
+              {currentPackages.map((pkg) => (
+                <option key={pkg.id} value={pkg.id}>
+                  {pkg.name} (₦{pkg.price.toLocaleString()} - {pkg.commission}% discount)
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Password */}

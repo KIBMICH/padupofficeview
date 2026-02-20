@@ -2,6 +2,13 @@ import { Package, AccountType, PackageType } from '../types';
 
 export const salesAgentPackages: Package[] = [
   {
+    id: PackageType.MICRO,
+    name: 'Micro',
+    price: 35000,
+    commission: 0.5,
+    accountType: AccountType.SALES_AGENT,
+  },
+  {
     id: PackageType.STANDARD,
     name: 'Standard',
     price: 78000,
